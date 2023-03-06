@@ -63,7 +63,7 @@ const Registration = () => {
                   Gender,
                 };
                 console.log(userInfo);
-                fetch("http://localhost:5000/userinfo", {
+                fetch("https://cafe-server-side.vercel.app/userinfo", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",

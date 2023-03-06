@@ -22,7 +22,9 @@ export const router = createBrowserRouter([
       {
         path: "/details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/item-details/${params.id}`),
+          fetch(
+            `https://cafe-server-side.vercel.app/item-details/${params.id}`
+          ),
         element: <ItemDetails></ItemDetails>,
       },
       {

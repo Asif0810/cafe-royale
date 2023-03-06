@@ -13,9 +13,9 @@ const FeatureLayOut = () => {
   const { data: categories = [] } = useQuery({
     queryKey: ["all-categories", items],
     queryFn: () =>
-      fetch(`http://localhost:5000/all-categories?category=${items}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `https://cafe-server-side.vercel.app/all-categories?category=${items}`
+      ).then((res) => res.json()),
   });
 
   return (
