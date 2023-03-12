@@ -8,13 +8,13 @@ const Buying = () => {
   const { data: myOrders = [], refetch } = useQuery({
     queryKey: ["orderd"],
     queryFn: () =>
-      fetch(`https://cafe-server-side.vercel.app/orderd?id`)
+      fetch(`https://cafe-server.vercel.app/orderd`)
         .then((res) => res.json())
         .catch(console.error()),
   });
   // delete an item
   const deleteHandler = (id) => {
-    fetch(`https://cafe-server-side.vercel.app/delete-item/${id}`, {
+    fetch(`https://cafe-server.vercel.app/delete-item/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

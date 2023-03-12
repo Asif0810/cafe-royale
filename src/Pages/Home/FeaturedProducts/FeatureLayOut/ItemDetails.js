@@ -24,7 +24,7 @@ const ItemDetails = () => {
       quantity,
       coffee_category,
     };
-    fetch(`https://cafe-server-side.vercel.app/orderd`, {
+    fetch(`https://cafe-server.vercel.app/orderd`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

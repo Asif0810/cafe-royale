@@ -65,7 +65,21 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <Link>Admin</Link>
+        <NavLink
+          to="/admin"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  color: "#6D3622",
+                  background: "#f0f0f0",
+                  borderRadius: "0px",
+                  borderRadius: "2px",
+                }
+              : { color: "white" }
+          }
+        >
+          Admin
+        </NavLink>
       </li>
     </>
   );

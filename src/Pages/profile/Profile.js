@@ -1,9 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../../Context/AuthProvider";
 import "./Profile.css";
+
 const Profile = () => {
   const { user } = useContext(Context);
-  console.log(user);
+  const email = user?.email;
+  console.log(email);
+  const { data: myInformation = [] } = useQuery({
+    queryKey: ["myinfo", email],
+    queryFn: () =>
+      fetch(`https://cafe-server.vercel.app/myinfo?email=${email}`).then(
+        (res) => res.json().catch(console.error())
+      ),
+  });
+  console.log(myInformation);
   return (
     <div className="h-[500px] justify-center items-center">
       <div className="w-[400px] mx-auto  border-2 mt-14 p-6">
@@ -15,9 +27,13 @@ const Profile = () => {
         />
         <p className=" text-center font-bold">{user?.displayName}</p>
         <div className="w-full">
-          <button style={{ marginLeft: "110px" }} className="btn btn-sm ">
+          <Link
+            to={"/profile/update-profile"}
+            style={{ marginLeft: "110px" }}
+            className="btn btn-sm "
+          >
             update profile
-          </button>
+          </Link>
         </div>
         <div className="">
           <h2 className="text-xl font-bold inline">Name : </h2>

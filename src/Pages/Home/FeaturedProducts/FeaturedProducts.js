@@ -4,7 +4,7 @@ const FeaturedProducts = ({ featureItems, active }) => {
   const { data: featured = [] } = useQuery({
     queryKey: ["featured"],
     queryFn: () =>
-      fetch("https://cafe-server-side.vercel.app/featured").then((res) =>
+      fetch("https://cafe-server.vercel.app/featured").then((res) =>
         res.json()
       ),
   });

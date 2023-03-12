@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../../../Context/AuthProvider";
 import loginbanner from "./loginassets/pexels-tyler-nix-2396220.jpg";
 const Registration = () => {
+  const navigate = useNavigate();
   const [registerError, setregisterError] = useState("");
   const imghostkey = process.env.REACT_APP_imgbb_key;
 
@@ -24,6 +26,7 @@ const Registration = () => {
   };
   const registerHandler = (data) => {
     const name = data.name;
+    const address = data.address;
     setregisterError(" ");
     const image = data.image[0];
     const formdata = new FormData();
@@ -44,16 +47,16 @@ const Registration = () => {
               displayName: name,
               photoURL: imgdata,
             };
-            console.log(data.name);
             updateUser(updateData)
               .then(() => {
                 toast.success("user create successfull");
                 const user_name = user.displayName;
                 const user_Email = user.email;
-                const address = "";
+                const address = address;
                 const College = "";
                 const Phone = "";
                 const Gender = "";
+                const role = "customer";
                 const userInfo = {
                   user_name,
                   user_Email,
@@ -63,7 +66,7 @@ const Registration = () => {
                   Gender,
                 };
                 console.log(userInfo);
-                fetch("https://cafe-server-side.vercel.app/userinfo", {
+                fetch("https://cafe-server.vercel.app/userinfo", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",
@@ -73,13 +76,13 @@ const Registration = () => {
                   .then((res) => res.json())
                   .then((data) => console.log(data))
                   .catch(console.error());
+                navigate("/");
               })
               .catch(console.error());
           })
           .catch(console.error());
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         setregisterError(errorMessage);
         // ..
@@ -154,6 +157,25 @@ const Registration = () => {
                     className="input w-[300px] h-[30px] input-bordered"
                     {...register("password", {
                       required: "password is required",
+                    })}
+                  />
+                  {errors.password && (
+                    <small className="text-red-600">
+                      {errors.password?.message}
+                    </small>
+                  )}
+                </div>
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text">Address</span>
+                  </label>
+                  <input
+                    style={{ borderRadius: "0px" }}
+                    type="address"
+                    placeholder="type your Address"
+                    className="input w-[300px] h-[30px] input-bordered"
+                    {...register("address", {
+                      required: "address is required",
                     })}
                   />
                   {errors.password && (
