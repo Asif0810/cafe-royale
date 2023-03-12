@@ -65,7 +65,9 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/profile/update-profile",
+        path: "/profile/update-profile/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/myinfo/${params.id}`),
         element: <Update></Update>,
       },
       {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ChefDetails = ({ chef }) => {
   const { age, country, description, name, photo, _id, topItem } = chef;
-  console.log(name);
+
   return (
     <div className="mx-auto">
       <Link
@@ -27,6 +27,5 @@ const ChefDetails = ({ chef }) => {
     </div>
   );
 };
-// box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
 export default ChefDetails;

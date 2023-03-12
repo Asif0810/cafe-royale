@@ -13,9 +13,11 @@ import {
 export const Context = createContext(app);
 const auth = getAuth();
 const AuthProvider = ({ children }) => {
+  const [selectDate, setSelectedDate] = useState(new Date());
   const googleProvider = new GoogleAuthProvider();
   const [user, setuser] = useState(null);
   const [loader, setLoader] = useState(true);
+
   const signUp = (email, passoword) => {
     setLoader(true);
     return createUserWithEmailAndPassword(auth, email, passoword);
@@ -44,6 +46,7 @@ const AuthProvider = ({ children }) => {
     updateUser,
     google,
     loader,
+    selectDate,
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -54,6 +57,7 @@ const AuthProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
+
   return <Context.Provider value={userInfo}>{children}</Context.Provider>;
 };
 

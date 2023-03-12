@@ -1,13 +1,52 @@
+import { format } from "date-fns";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { Context } from "../../Context/AuthProvider";
 
 const Update = () => {
-  const { user } = useContext(Context);
+  const navigate = useNavigate();
+  const { user, selectDate } = useContext(Context);
+  const date = format(selectDate, "PP");
+
+  const updatedUser = useLoaderData();
+  const { College, _id, Gender, Phone, address, role, user_Email, user_name } =
+    updatedUser;
 
   const { register, handleSubmit } = useForm();
   const updateHandler = (data) => {
-    console.log(data);
+    const name = data.name;
+    const email = data.email;
+    const address = data.address;
+    const college = data.college;
+    const phone = data.phone;
+    const gender = data.gender;
+    const updateInfo = {
+      name,
+      email,
+      address,
+      college,
+      phone,
+      gender,
+    };
+    console.log(updateInfo);
+    fetch(`http://localhost:5000/myinfo/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          navigate("/profile");
+          toast.success("user update has been completed");
+        }
+      })
+      .catch(console.error());
   };
   return (
     <div>
@@ -24,11 +63,21 @@ const Update = () => {
               {user?.displayName}
             </p>
 
-            <form onClick={handleSubmit(updateHandler)} className="">
-              <h2 className=" font-bold inline">Name : </h2>
+            <form onSubmit={handleSubmit(updateHandler)} className="">
+              <h2 className="font-bold inline">Name : </h2>
               <input
                 {...register("name")}
                 type="text"
+                defaultValue={user_name}
+                placeholder="Type here"
+                className="input h-[35px] input-bordered w-full max-w-xs"
+              />
+              <br />
+              <h2 className="font-bold inline">Email : </h2>
+              <input
+                {...register("email")}
+                type="email"
+                defaultValue={user_Email}
                 placeholder="Type here"
                 className="input h-[35px] input-bordered w-full max-w-xs"
               />
@@ -36,6 +85,7 @@ const Update = () => {
               <h2 className=" font-bold inline">Address : </h2>
               <input
                 {...register("address")}
+                defaultValue={address}
                 type="address"
                 placeholder="Type here"
                 className="input h-[35px] input-bordered w-full max-w-xs"
@@ -45,6 +95,7 @@ const Update = () => {
               <input
                 {...register("college")}
                 type="text"
+                defaultValue={College}
                 placeholder="Type here"
                 className="input h-[35px] input-bordered w-full max-w-xs"
               />
@@ -53,6 +104,7 @@ const Update = () => {
               <input
                 {...register("phone")}
                 type="phone"
+                defaultValue={Phone}
                 placeholder="Type here"
                 className="input h-[35px] input-bordered w-full max-w-xs"
               />
@@ -60,6 +112,7 @@ const Update = () => {
               <h2 className=" font-bold inline">Gender : </h2>
               <select
                 {...register("gender")}
+                defaultValue={Gender}
                 className="select select-bordered h-[35px] w-full max-w-xs"
               >
                 <option value="">select</option>

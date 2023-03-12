@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -10,13 +11,14 @@ const Registration = () => {
   const [registerError, setregisterError] = useState("");
   const imghostkey = process.env.REACT_APP_imgbb_key;
 
-  const { signUp, updateUser, google, user } = useContext(Context);
-
+  const { signUp, updateUser, google, user, selectDate } = useContext(Context);
+  const date = format(selectDate, "PP");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const googleHander = () => {
     google()
       .then((res) => {
@@ -26,7 +28,7 @@ const Registration = () => {
   };
   const registerHandler = (data) => {
     const name = data.name;
-    const address = data.address;
+    const useraddress = data.address;
     setregisterError(" ");
     const image = data.image[0];
     const formdata = new FormData();
@@ -35,7 +37,7 @@ const Registration = () => {
     signUp(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+
         fetch(url, {
           method: "POST",
           body: formdata,
@@ -52,7 +54,7 @@ const Registration = () => {
                 toast.success("user create successfull");
                 const user_name = user.displayName;
                 const user_Email = user.email;
-                const address = address;
+                const address = useraddress;
                 const College = "";
                 const Phone = "";
                 const Gender = "";
@@ -64,6 +66,8 @@ const Registration = () => {
                   College,
                   Phone,
                   Gender,
+                  role,
+                  date,
                 };
                 console.log(userInfo);
                 fetch("https://cafe-server.vercel.app/userinfo", {

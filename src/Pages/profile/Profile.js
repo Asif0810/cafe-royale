@@ -6,16 +6,19 @@ import "./Profile.css";
 
 const Profile = () => {
   const { user } = useContext(Context);
-  const email = user?.email;
-  console.log(email);
-  const { data: myInformation = [] } = useQuery({
-    queryKey: ["myinfo", email],
+  const { data: myInformation = [], isLoading } = useQuery({
+    queryKey: ["myinfo", user?.email],
     queryFn: () =>
-      fetch(`https://cafe-server.vercel.app/myinfo?email=${email}`).then(
-        (res) => res.json().catch(console.error())
+      fetch(`http://localhost:5000/myinfo?email=${user?.email}`).then((res) =>
+        res.json().catch(console.error())
       ),
   });
+  if (isLoading) {
+    return <div>loading.......</div>;
+  }
   console.log(myInformation);
+  const { College, Gender, Phone, address, role, user_Email, user_name, _id } =
+    myInformation;
   return (
     <div className="h-[500px] justify-center items-center">
       <div className="w-[400px] mx-auto  border-2 mt-14 p-6">
@@ -28,7 +31,7 @@ const Profile = () => {
         <p className=" text-center font-bold">{user?.displayName}</p>
         <div className="w-full">
           <Link
-            to={"/profile/update-profile"}
+            to={`/profile/update-profile/${_id}`}
             style={{ marginLeft: "110px" }}
             className="btn btn-sm "
           >
@@ -36,19 +39,35 @@ const Profile = () => {
           </Link>
         </div>
         <div className="">
-          <h2 className="text-xl font-bold inline">Name : </h2>
-          <span style={{ color: "gray" }}>{user?.displayName}</span> <br />
-          <h2 className="text-xl font-bold inline">Email : </h2>
-          <span style={{ color: "gray" }}>{user?.email}</span>
-          <br />
-          <h2 className="text-xl font-bold inline">Address : </h2>
-          <span style={{ color: "gray" }}></span> <br />
-          <h2 className="text-xl font-bold inline">College : </h2>
-          <span style={{ color: "gray" }}></span> <br />
-          <h2 className="text-xl font-bold inline">Phone : </h2>
-          <span style={{ color: "gray" }}></span> <br />
-          <h2 className="text-xl font-bold inline">Gender : </h2>
-          <span style={{ color: "gray" }}></span> <br /> <br />
+          <div className="mt-1">
+            <h2 className="text-xl font-bold inline">Name : </h2>
+            <span style={{ color: "gray" }}>{user_name}</span> <br />
+          </div>
+          <div className="mt-1">
+            <h2 className="text-xl font-bold inline">Email : </h2>
+            <span style={{ color: "gray" }}>{user_Email}</span>
+            <br />
+          </div>
+          <div className="mt-1">
+            <h2 className="text-xl font-bold inline">Address : </h2>
+            <span style={{ color: "gray" }}>{address}</span> <br />
+          </div>
+          <div className="mt-1">
+            <h2 className="text-xl font-bold inline">College : </h2>
+            <span style={{ color: "gray" }}>{College}</span> <br />
+          </div>
+          <div className="mt-1">
+            <h2 className="text-xl font-bold inline">Phone : </h2>
+            <span style={{ color: "gray" }}>{Phone}</span> <br />
+          </div>
+          <div className="mt-1">
+            <h2 className="text-xl font-bold inline">Gender : </h2>
+            <span style={{ color: "gray" }}>{Gender}</span> <br />
+          </div>
+          <div className="mt-1">
+            <h2 className="text-xl font-bold inline">User Role : </h2>
+            <span style={{ color: "gray" }}>{role}</span> <br /> <br />
+          </div>
         </div>
       </div>
     </div>
