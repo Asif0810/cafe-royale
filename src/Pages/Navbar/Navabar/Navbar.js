@@ -107,7 +107,7 @@ const Navbar = () => {
           <ul
             style={{ borderTop: "5px solid #6D3622" }}
             tabIndex={0}
-            className="menu mt-3 menu-compact dropdown-content p-2 text-[#6D3622] shadow bg-base-100 border-2 w-52"
+            className="menu mt-3 menu-compact dropdown-content p-2 text-[#6D3622] shadow bg-black border-2 w-52"
           >
             {navbar}
           </ul>
@@ -135,7 +135,7 @@ const Navbar = () => {
           <ul
             tabIndex={0}
             style={{ borderRadius: "0px", borderTop: "5px solid #6D3622" }}
-            className="mt-6 p-2 shadow  menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+            className="mt-6 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           >
             <li>
               <Link to={"profile"} className="justify-between">

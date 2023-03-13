@@ -67,7 +67,7 @@ export const router = createBrowserRouter([
       {
         path: "/profile/update-profile/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/myinfo/${params.id}`),
+          fetch(`https://cafe-server.vercel.app/myinfo/${params.id}`),
         element: <Update></Update>,
       },
       {

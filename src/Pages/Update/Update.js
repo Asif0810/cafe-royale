@@ -31,7 +31,7 @@ const Update = () => {
       gender,
     };
     console.log(updateInfo);
-    fetch(`http://localhost:5000/myinfo/${_id}`, {
+    fetch(`https://cafe-server.vercel.app/myinfo/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

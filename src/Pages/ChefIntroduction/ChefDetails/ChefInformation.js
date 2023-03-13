@@ -6,7 +6,7 @@ const ChefInformation = () => {
   const information = useLoaderData();
   const { age, country, description, experience, name, photo, _id, topItem } =
     information;
-  console.log(topItem);
+
   return (
     <div className="lg:w-[1140px] md:w-[1140px] w-full mx-auto">
       <div className="">

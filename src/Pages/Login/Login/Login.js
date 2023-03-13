@@ -22,13 +22,13 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         navigate(from, { replace: true });
-        console.log(user);
+      
       })
       .catch((error) => {
         const errorMessage = error.message;
         setloginerror(errorMessage);
       });
-    console.log(data);
+    
   };
   return (
     <div className="h-[500px] justify-center items-center flex border-2">

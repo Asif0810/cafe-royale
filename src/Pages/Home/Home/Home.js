@@ -7,6 +7,7 @@ import Cupdemo from "../Cupdemo/Cupdemo";
 import Event from "../Event/Event";
 
 import FeatureLayOut from "../FeaturedProducts/FeatureLayOut/FeatureLayOut";
+import TimeLine from "../TimeLine/TimeLine";
 import Welcome from "../Welcome/Welcome";
 
 const Home = () => {
@@ -19,9 +20,10 @@ const Home = () => {
         <FeatureLayOut></FeatureLayOut>
         <AboutShop></AboutShop>
         <ChefIntroduction></ChefIntroduction>
+        <TimeLine></TimeLine>
         <ExploreCoffee></ExploreCoffee>
-        <Event></Event>
       </div>
+      <Event></Event>
     </div>
   );
 };

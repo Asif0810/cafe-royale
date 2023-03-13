@@ -38,7 +38,6 @@ const ItemDetails = () => {
         }
       })
       .catch(console.error());
-    console.log(coffee);
   };
 
   return (

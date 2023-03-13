@@ -6,7 +6,7 @@ const Navbar = () => {
   const userPhoto =
     "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
   const { user, logout } = useContext(Context);
-  console.log(user);
+
   const logoutHandler = () => {
     logout()
       .then(() => {})
@@ -103,7 +103,7 @@ const Navbar = () => {
           <ul
             tabIndex={0}
             style={{ borderRadius: "0px", borderTop: "5px solid #6D3622" }}
-            className="mt-6 p-2 shadow  menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+            className="mt-6 p-2 shadow  menu menu-compact dropdown-content  rounded-box w-52"
           >
             <li>
               <a className="justify-between">

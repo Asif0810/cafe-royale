@@ -6,7 +6,7 @@ const Admin = () => {
   const { data: allusers = [] } = useQuery({
     queryKey: ["alluser"],
     queryFn: () =>
-      fetch("http://localhost:5000/alluser")
+      fetch("https://cafe-server.vercel.app/alluser")
         .then((res) => res.json())
         .catch(console.error()),
   });
