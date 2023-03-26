@@ -4,6 +4,7 @@ import Aboutme from "../Pages/About/Aboutme";
 import Admin from "../Pages/Admin/Admin";
 import Buying from "../Pages/Buying/Buying";
 import ChefInformation from "../Pages/ChefIntroduction/ChefDetails/ChefInformation";
+import DisCoverDetails from "../Pages/DisCoverDetails/DisCoverDetails";
 
 import ItemDetails from "../Pages/Home/FeaturedProducts/FeatureLayOut/ItemDetails";
 import Home from "../Pages/Home/Home/Home";
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`https://cafe-server.vercel.app/chef-information/${params.id}`),
         element: <ChefInformation></ChefInformation>,
+      },
+      {
+        path: "/discover-details",
+        element: <DisCoverDetails></DisCoverDetails>,
       },
     ],
   },

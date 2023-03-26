@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { add, format } from "date-fns";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -11,26 +11,26 @@ const Update = () => {
   const date = format(selectDate, "PP");
 
   const updatedUser = useLoaderData();
-  const { College, _id, Gender, Phone, address, role, user_Email, user_name } =
+  const { College, _id, Gender, Phone, role, user_Email, user_name } =
     updatedUser;
-
+  console.log(College);
   const { register, handleSubmit } = useForm();
   const updateHandler = (data) => {
     const name = data.name;
     const email = data.email;
-    const address = data.address;
+
     const college = data.college;
     const phone = data.phone;
     const gender = data.gender;
     const updateInfo = {
       name,
       email,
-      address,
+
       college,
       phone,
       gender,
     };
-    console.log(updateInfo);
+
     fetch(`https://cafe-server.vercel.app/myinfo/${_id}`, {
       method: "PUT",
       headers: {
@@ -81,15 +81,7 @@ const Update = () => {
                 placeholder="Type here"
                 className="input h-[35px] input-bordered w-full max-w-xs"
               />
-              <br />
-              <h2 className=" font-bold inline">Address : </h2>
-              <input
-                {...register("address")}
-                defaultValue={address}
-                type="address"
-                placeholder="Type here"
-                className="input h-[35px] input-bordered w-full max-w-xs"
-              />
+
               <br />
               <h2 className="font-bold inline">College : </h2>
               <input

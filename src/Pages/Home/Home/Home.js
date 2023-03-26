@@ -7,6 +7,7 @@ import Cupdemo from "../Cupdemo/Cupdemo";
 import Event from "../Event/Event";
 
 import FeatureLayOut from "../FeaturedProducts/FeatureLayOut/FeatureLayOut";
+import OurStory from "../OurStory/OurStory";
 import TimeLine from "../TimeLine/TimeLine";
 import Welcome from "../Welcome/Welcome";
 
@@ -24,6 +25,9 @@ const Home = () => {
         <ExploreCoffee></ExploreCoffee>
       </div>
       <Event></Event>
+      <div className=" lg:w-[1140px]  mx-auto ">
+        <OurStory></OurStory>
+      </div>
     </div>
   );
 };

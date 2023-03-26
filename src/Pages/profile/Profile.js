@@ -17,7 +17,7 @@ const Profile = () => {
     return <div>loading.......</div>;
   }
   console.log(myInformation);
-  const { College, Gender, Phone, address, role, user_Email, user_name, _id } =
+  const { College, Gender, Phone, role, user_Email, user_name, _id } =
     myInformation;
   return (
     <div className="h-[500px] justify-center items-center">
@@ -47,10 +47,6 @@ const Profile = () => {
             <h2 className="text-xl font-bold inline">Email : </h2>
             <span style={{ color: "gray" }}>{user_Email}</span>
             <br />
-          </div>
-          <div className="mt-1">
-            <h2 className="text-xl font-bold inline">Address : </h2>
-            <span style={{ color: "gray" }}>{address}</span> <br />
           </div>
           <div className="mt-1">
             <h2 className="text-xl font-bold inline">College : </h2>

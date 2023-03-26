@@ -11,7 +11,8 @@ const Registration = () => {
   const [registerError, setregisterError] = useState("");
   const imghostkey = process.env.REACT_APP_imgbb_key;
 
-  const { signUp, updateUser, google, user, selectDate } = useContext(Context);
+  const { signUp, updateUser, google, selectDate } = useContext(Context);
+
   const date = format(selectDate, "PP");
   const {
     register,
@@ -21,14 +22,44 @@ const Registration = () => {
 
   const googleHander = () => {
     google()
-      .then((res) => {
-        const user = res.user;
+      .then((result) => {
+        const user = result.user;
+        const user_name = user.displayName;
+        console.log(user_name);
+        const user_Email = user.email;
+        const address = "";
+        const College = "";
+        const Phone = "";
+        const Gender = "";
+        const role = "customer";
+        const userInfo = {
+          user_name,
+          user_Email,
+          address,
+          College,
+          Phone,
+          Gender,
+          role,
+          date,
+        };
+        navigate("/");
+        fetch("https://cafe-server.vercel.app/userinfo", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
       })
       .catch(console.error());
   };
   const registerHandler = (data) => {
     const name = data.name;
-    const useraddress = data.address;
+    // const useraddress = data.address;
     setregisterError(" ");
     const image = data.image[0];
     const formdata = new FormData();
@@ -37,7 +68,7 @@ const Registration = () => {
     signUp(data.email, data.password)
       .then((result) => {
         const user = result.user;
-
+        console.log(user);
         fetch(url, {
           method: "POST",
           body: formdata,
@@ -53,8 +84,9 @@ const Registration = () => {
               .then(() => {
                 toast.success("user create successfull");
                 const user_name = user.displayName;
+                console.log(user_name);
                 const user_Email = user.email;
-                const address = useraddress;
+                const father = "";
                 const College = "";
                 const Phone = "";
                 const Gender = "";
@@ -62,7 +94,7 @@ const Registration = () => {
                 const userInfo = {
                   user_name,
                   user_Email,
-                  address,
+                  father,
                   College,
                   Phone,
                   Gender,
@@ -113,7 +145,7 @@ const Registration = () => {
               {/* register form */}
               <form
                 onSubmit={handleSubmit(registerHandler)}
-                className="mt-3 pt-4 pl-10 pr-10 pb-10"
+                className="mt-3 pt-4 pl-10 pr-10 "
               >
                 <div className="form-control w-full ">
                   <label className="label">
@@ -169,7 +201,7 @@ const Registration = () => {
                     </small>
                   )}
                 </div>
-                <div className="form-control w-full">
+                {/* <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text">Address</span>
                   </label>
@@ -187,7 +219,7 @@ const Registration = () => {
                       {errors.password?.message}
                     </small>
                   )}
-                </div>
+                </div> */}
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text">profile picture</span>
@@ -215,16 +247,16 @@ const Registration = () => {
                   </button>
                 </div>
                 <div className="divider">OR</div>
-                <div className="" style={{ border: "2px solid #6D3622" }}>
-                  <button
-                    onClick={googleHander}
-                    type="submit"
-                    className="border-2 w-[300px] text-[#6D3622] py-2 flex font-bold  justify-center items-center"
-                  >
-                    <FcGoogle className="text-2xl pr-1"></FcGoogle> GOOGLE
-                  </button>
-                </div>
               </form>
+              <div className=" pt-4 pl-10 pr-10 pb-10">
+                <button
+                  onClick={googleHander}
+                  type="submit"
+                  className="border-2 border-[#6D3622] w-[300px] text-[#6D3622] py-2 flex font-bold  justify-center items-center"
+                >
+                  <FcGoogle className="text-2xl pr-1"></FcGoogle> GOOGLE
+                </button>
+              </div>
             </div>
           </div>
         </div>

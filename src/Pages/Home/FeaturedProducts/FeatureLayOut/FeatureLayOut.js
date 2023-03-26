@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-// import { Outlet } from "react-router-dom";
+
 import FeaturedProducts from "../FeaturedProducts";
 import ItemsCategoriesDetails from "./ItemsCategoriesDetails";
 

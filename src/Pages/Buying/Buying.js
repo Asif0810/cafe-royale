@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
+import { Context } from "../../Context/AuthProvider";
 import BuyingDetails from "./BuyingDetails";
 
 const Buying = () => {
-  // show all orderd items
+  const { user } = useContext(Context);
+
   const { data: myOrders = [], refetch } = useQuery({
-    queryKey: ["orderd"],
+    queryKey: ["orderd", user?.email],
     queryFn: () =>
-      fetch(`https://cafe-server.vercel.app/orderd`)
+      fetch(`https://cafe-server.vercel.app/orderd?email=${user?.email}`)
         .then((res) => res.json())
         .catch(console.error()),
   });

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../../../../Context/AuthProvider";
 import "./Style.css";
 const ItemsCategoriesDetails = ({ category }) => {
+  const { user } = useContext(Context);
   const { type, present_price, old_price, photo, _id } = category;
+
   return (
     <Link to={`details/${_id}`}>
       <div

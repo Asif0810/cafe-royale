@@ -1,45 +1,49 @@
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { Context } from "../../../../Context/AuthProvider";
 
 const ItemDetails = () => {
   const { user } = useContext(Context);
   const item = useLoaderData();
+
   const { category, details, photo, present_price, type } = item;
 
   const orderHandler = () => {
-    const Customer_email = user?.email;
-    const coffee_photo = photo;
-    const price = present_price;
-    const coffee_name = type;
-    const coffee_category = category;
-    const quantity = 1;
+    if (user?.email) {
+      const Customer_email = user?.email;
+      const coffee_photo = photo;
+      const price = present_price;
+      const coffee_name = type;
+      const coffee_category = category;
+      const quantity = 1;
 
-    const coffee = {
-      Customer_email,
-      coffee_photo,
-      price,
-      coffee_name,
-      quantity,
-      coffee_category,
-    };
-    fetch(`https://cafe-server.vercel.app/orderd`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(coffee),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          toast.success("order success please check order page");
-        }
+      const coffee = {
+        Customer_email,
+        coffee_photo,
+        price,
+        coffee_name,
+        quantity,
+        coffee_category,
+      };
+      fetch(`https://cafe-server.vercel.app/orderd`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(coffee),
       })
-      .catch(console.error());
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("order success please check order page");
+          }
+        })
+        .catch(console.error());
+    } else {
+      toast.error("please Login other wise you cant't Purchase");
+    }
   };
-
   return (
     <div>
       <div className="lg:w-[1140px] mt-32 lg:mt-0 md:mt-0 md:w-[800px]  mx-auto h-[450px] flex justify-center items-center">

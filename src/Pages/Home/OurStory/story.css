@@ -1,0 +1,11 @@
+.storycard {
+  border: 5px solid white;
+  outline: 5px solid #502600;
+}
+.storycard2 {
+  border: 5px solid white;
+  outline: 5px solid #dac4b4;
+}
+.login {
+  background-color: aqua;
+}
