@@ -10,7 +10,7 @@ const Registration = () => {
   const navigate = useNavigate();
   const [registerError, setregisterError] = useState("");
   const imghostkey = process.env.REACT_APP_imgbb_key;
-
+  console.log(imghostkey);
   const { signUp, updateUser, google, selectDate } = useContext(Context);
 
   const date = format(selectDate, "PP");
@@ -62,6 +62,7 @@ const Registration = () => {
     // const useraddress = data.address;
     setregisterError(" ");
     const image = data.image[0];
+    console.log(image);
     const formdata = new FormData();
     formdata.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imghostkey}`;

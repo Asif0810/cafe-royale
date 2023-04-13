@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { Context } from "../../../../Context/AuthProvider";
 
 const ItemDetails = () => {
   const { user } = useContext(Context);
   const item = useLoaderData();
 
-  const { category, details, photo, present_price, type } = item;
+  const { category, details, photo, present_price, type, _id } = item;
 
   const orderHandler = () => {
     if (user?.email) {
@@ -59,6 +59,11 @@ const ItemDetails = () => {
                 alt="Movie"
               />
             </figure>
+            <div>
+              <Link to={`/order/review/${_id}`} className="btn btn-link">
+                Please review
+              </Link>
+            </div>
           </div>
           <div className="card-body">
             <h2 className="card-title lg:justify-center md:justify-center justify-start">

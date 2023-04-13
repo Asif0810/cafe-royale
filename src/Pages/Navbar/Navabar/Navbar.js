@@ -44,7 +44,7 @@ const Navbar = () => {
               : { color: "white" }
           }
         >
-          About
+          About me
         </NavLink>
       </li>
       <li>

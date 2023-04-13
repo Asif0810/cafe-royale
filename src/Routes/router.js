@@ -7,6 +7,7 @@ import ChefInformation from "../Pages/ChefIntroduction/ChefDetails/ChefInformati
 import DisCoverDetails from "../Pages/DisCoverDetails/DisCoverDetails";
 
 import ItemDetails from "../Pages/Home/FeaturedProducts/FeatureLayOut/ItemDetails";
+import Review from "../Pages/Home/FeaturedProducts/FeatureLayOut/Review";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login/Login";
 import Registration from "../Pages/Login/Registeration/Registration";
@@ -56,6 +57,12 @@ export const router = createBrowserRouter([
             <Buying></Buying>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/order/review/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/product-review/${params.id}`),
+        element: <Review></Review>,
       },
       {
         path: "/profile",

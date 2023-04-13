@@ -52,9 +52,7 @@ const Navbar = () => {
       <li>
         <Link>Contract</Link>
       </li>
-      <li>
-        <Link>Admin</Link>
-      </li>
+      <li>{/* <Link>Admin</Link> */}</li>
     </>
   );
 
